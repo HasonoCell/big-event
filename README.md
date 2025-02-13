@@ -1,6 +1,6 @@
 # big-event
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a easy project based on Vue3 and Element-UI
 
 ## Recommended IDE Setup
 
