@@ -17,7 +17,7 @@ const formModel = ref({
 })
 const rules = {
     cate_name: [
-        { requierd: true, message: '请输入分类名称', trigger: 'blur' },
+        { required: true, message: '请输入分类名称', trigger: 'blur' },
         { 
             pattern: /^\S{1,10}$/,
             message: '分类名必须是1-10位的非空字符',
