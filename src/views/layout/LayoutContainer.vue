@@ -1,38 +1,38 @@
 <script setup>
 import {
-    Management,
-    Promotion,
-    UserFilled,
-    User,
-    Crop,
-    EditPen,
-    SwitchButton,
-    CaretBottom
-} from '@element-plus/icons-vue'
-import avatar from '@/assets/default.png'
-import { onMounted } from 'vue'
-import { useUserStore } from '../../stores'
-import router from '../../router'
+  Management,
+  Promotion,
+  UserFilled,
+  User,
+  Crop,
+  EditPen,
+  SwitchButton,
+  CaretBottom,
+} from "@element-plus/icons-vue";
+import avatar from "@/assets/default.png";
+import { onMounted } from "vue";
+import { useUserStore } from "../../stores";
+import router from "../../router";
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 onMounted(async () => {
-    await userStore.getUser()
-})
+  await userStore.getUser();
+});
 
 const handleCommand = async (command) => {
-  if (command === 'logout') {
-    await ElMessageBox.confirm('你确定退出登录吗？', '温馨提示', {
-      type: 'warning',
-      confirmButtonText: '确认',
-      cancelButtonText: '取消'
-    })
-    userStore.removeToken()
-    userStore.setUser({})
-    router.push(`/login`)
+  if (command === "logout") {
+    await ElMessageBox.confirm("你确定退出登录吗？", "温馨提示", {
+      type: "warning",
+      confirmButtonText: "确认",
+      cancelButtonText: "取消",
+    });
+    userStore.removeToken();
+    userStore.setUser({});
+    router.push(`/login`);
   } else {
-    router.push(`/user/${ command }`)
+    router.push(`/user/${command}`);
   }
-}
+};
 </script>
 
 <template>
@@ -76,10 +76,14 @@ const handleCommand = async (command) => {
     </el-aside>
     <el-container>
       <el-header>
-        <div>用户：<strong>{{ userStore.user.nickname || userStore.user.username }}</strong></div>
+        <div>
+          用户：<strong>{{
+            userStore.user.nickname || userStore.user.username
+          }}</strong>
+        </div>
         <el-dropdown placement="bottom-end" @command="handleCommand">
           <span class="el-dropdown__box">
-            <el-avatar :src="userStore.user.user_pic || avatar" /> 
+            <el-avatar :src="userStore.user.user_pic || avatar" />
             <el-icon><CaretBottom /></el-icon>
           </span>
           <template #dropdown>
@@ -110,49 +114,49 @@ const handleCommand = async (command) => {
 
 <style lang="scss" scoped>
 .layout-container {
-    height: 100vh;
+  height: 100vh;
 
-    .el-aside {
-        background-color: #232323;
+  .el-aside {
+    background-color: #232323;
 
-        &__logo {
-            height: 120px;
-            background: url('@/assets/logo.png') no-repeat center / 120px auto;
-        }
-
-        .el-menu {
-            border-right: none;
-        }
+    &__logo {
+      height: 120px;
+      background: url("@/assets/logo.png") no-repeat center / 120px auto;
     }
 
-    .el-header {
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .el-dropdown__box {
-            display: flex;
-            align-items: center;
-
-            .el-icon {
-                color: #999;
-                margin-left: 10px;
-            }
-
-            &:active,
-            &:focus {
-                outline: none;
-            }
-        }
+    .el-menu {
+      border-right: none;
     }
+  }
 
-    .el-footer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        color: #666;
+  .el-header {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .el-dropdown__box {
+      display: flex;
+      align-items: center;
+
+      .el-icon {
+        color: #999;
+        margin-left: 10px;
+      }
+
+      &:active,
+      &:focus {
+        outline: none;
+      }
     }
+  }
+
+  .el-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #666;
+  }
 }
 </style>

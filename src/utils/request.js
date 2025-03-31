@@ -6,17 +6,17 @@ import { ElMessage } from "element-plus"
 const baseURL = 'http://big-event-vue-api-t.itheima.net'
 
 const instance = axios.create({
-    baseURL,
-    timeout: 10000
+    baseURL: baseURL,
+    timeout: 100000
 })
 
 instance.interceptors.request.use(
-    (config) => {
+    (req) => {
         const userStore = useUserStore()
         if (userStore.token) {
-            config.headers.Authorization = userStore.token
+            req.headers.Authorization = userStore.token
         }
-        return config
+        return req
     },
     (err) => Promise.reject(err)
 )
